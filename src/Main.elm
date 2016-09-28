@@ -1,40 +1,16 @@
 module Main exposing (..)
 
-import Html exposing (..)
-import Html.App as App
-import Html.Events exposing (onClick)
-import Html.Attributes exposing (..)
-import Mood exposing (Mood(..))
-import String
-import Utils
-import Messages exposing (..)
-import Feel.List
-import Feel.Models exposing (Feel)
-import Feel.Commands exposing (fetchAll)
-import Feel.Update
+import Routing exposing (Route(..))
+import Navigation
+import Models exposing (Model)
+import Update
+import Views
+import Messages exposing (Msg(..))
 
 
-type alias Model =
-    { feels : List Feel
-    }
-
-
-init : ( Model, Cmd Msg )
-init =
-    ( { feels = [] }
-    , Cmd.map FeelMessage fetchAll
-    )
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case (Debug.log "msg" msg) of
-        FeelMessage subMsg ->
-            let
-                ( updatedFeels, cmd ) =
-                    Feel.Update.update subMsg model.feels
-            in
-                ( { model | feels = updatedFeels }, Cmd.map FeelMessage cmd )
+init : Result String Route -> ( Model, Cmd Msg )
+init result =
+    Models.initialModel <| Routing.routeFromResult result
 
 
 subscriptions : Model -> Sub Msg
@@ -42,15 +18,11 @@ subscriptions model =
     Sub.none
 
 
-view : Model -> Html Msg
-view model =
-    App.map FeelMessage (Feel.List.view model.feels)
-
-
 main =
-    App.program
+    Navigation.program Routing.parser
         { init = init
-        , view = view
-        , update = update
+        , view = Views.view
+        , update = Update.update
+        , urlUpdate = Update.urlUpdate
         , subscriptions = subscriptions
         }
