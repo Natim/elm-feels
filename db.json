@@ -1,0 +1,22 @@
+{
+  "feels": [
+    {
+      "id": "abc",
+      "description": "Nice day! Lots of fun stuff.",
+      "mood": "very good",
+      "timestamp": "2016-09-28T01:28:08.967Z"
+    },
+    {
+      "id": "ghl",
+      "description": "Had a pretty decent day!",
+      "mood": "good",
+      "timestamp": "2016-09-25T01:28:08.967Z"
+    },
+    {
+      "id": "def",
+      "description": "Not a very nice day...",
+      "mood": "bad",
+      "timestamp": "2016-09-27T01:28:08.967Z"
+    }
+  ]
+}
