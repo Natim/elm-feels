@@ -1,9 +1,10 @@
-module Feel.New exposing (..)
+module FeelForm.View exposing (..)
 
-import Feel.Messages exposing (..)
+import FeelForm.Messages exposing (..)
 import Html exposing (..)
+import Html.Events exposing (onInput)
 import Html.Attributes exposing (..)
-import Models exposing (Model)
+import FeelForm.Models exposing (Model)
 
 
 view : Model -> Html Msg
@@ -32,7 +33,17 @@ moodPicker model =
 
 feelDescriber : Model -> Html Msg
 feelDescriber model =
-    div [] [ text "Feel Describer" ]
+    div []
+        [ label [ class "label" ] [ text "What's going on?" ]
+        , p [ class "control" ]
+            [ textarea
+                [ class "textarea"
+                , placeholder model.descriptionPlaceholder
+                , onInput SetDescription
+                ]
+                []
+            ]
+        ]
 
 
 timeOfFeel : Model -> Html Msg

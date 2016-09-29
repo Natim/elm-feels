@@ -9,7 +9,7 @@ import Routing exposing (Route(..))
 import Messages exposing (Msg(..))
 import Feel.Messages exposing (Msg(ShowFeelsOverview, ShowAddFeel))
 import Feel.List
-import Feel.New
+import FeelForm.View
 
 
 type alias Url =
@@ -122,7 +122,7 @@ page model =
             Html.App.map FeelMessage (Feel.List.view model.feels)
 
         CreateFeelRoute ->
-            Html.App.map FeelMessage (Feel.New.view model)
+            Html.App.map FeelFormMessage (FeelForm.View.view model.feelFormState)
 
         NotFoundRoute ->
             notFoundView

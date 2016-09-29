@@ -4,6 +4,8 @@ import Routing exposing (Route)
 import Models exposing (Model)
 import Messages exposing (Msg(..))
 import Feel.Update
+import FeelForm.Update
+import FeelForm.Commands
 
 
 urlUpdate : Result String Route -> Model -> ( Model, Cmd Msg )
@@ -11,8 +13,16 @@ urlUpdate result model =
     let
         currentRoute =
             Routing.routeFromResult result
+
+        command =
+            case (Debug.log "route" currentRoute) of
+                Routing.CreateFeelRoute ->
+                    Cmd.map FeelFormMessage FeelForm.Commands.generateDescriptionPlaceholder
+
+                _ ->
+                    Cmd.none
     in
-        ( { model | route = currentRoute }, Cmd.none )
+        ( { model | route = currentRoute }, command )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -24,3 +34,10 @@ update msg model =
                     Feel.Update.update subMsg model.feels
             in
                 ( { model | feels = updatedFeels }, Cmd.map FeelMessage cmd )
+
+        FeelFormMessage subMsg ->
+            let
+                ( updatedFeelFormState, cmd ) =
+                    FeelForm.Update.update subMsg model.feelFormState
+            in
+                ( { model | feelFormState = updatedFeelFormState }, Cmd.map FeelFormMessage cmd )
