@@ -61,16 +61,30 @@ buttonLink action icon label =
         ]
 
 
+brand : Html Messages.Msg
+brand =
+    a
+        [ class "nav-item is-brand"
+        , href "/#"
+        , style [ ( "margin-left", "40px" ), ( "margin-right", "40px" ) ]
+        ]
+        [ h1 [ class "title is-primary is-3" ] [ text "Feels" ]
+        ]
+
+
 {-|
 TODO: conditionally show add feel button
 -}
 navigation : Model -> Html Messages.Msg
 navigation model =
-    nav [ class "nav container" ]
-        [ div [ class "nav-left nav-menu" ]
-            [ a [ class "nav-item is-brand", href "/#" ]
-                [ text "FEELS" ]
-            , tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log"
+    nav [ class "nav container has-shadow" ]
+        [ div [ class "nav-left" ]
+            [ brand
+            , div [ class "tabs is-medium" ]
+                [ ul []
+                    [ li [] [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
+                    ]
+                ]
             ]
         , div [ class "nav-right nav-menu" ]
             [ span [ class "nav-item" ]
