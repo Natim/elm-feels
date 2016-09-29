@@ -1,4 +1,4 @@
-module Mood exposing (..)
+module Feel.Mood exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

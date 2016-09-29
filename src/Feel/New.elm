@@ -1,7 +1,6 @@
 module Feel.New exposing (..)
 
 import Feel.Messages exposing (..)
-import Feel.Models exposing (Feel)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Models exposing (Model)

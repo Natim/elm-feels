@@ -1,6 +1,6 @@
 module Feel.Models exposing (..)
 
-import Mood exposing (Mood(..))
+import Feel.Mood exposing (Mood(..))
 import Date exposing (Date)
 
 

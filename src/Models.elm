@@ -25,5 +25,8 @@ initialModel route =
         ViewFeelsRoute ->
             ( defaultState route, Cmd.map FeelMessage fetchAll )
 
+        CreateFeelRoute ->
+            ( defaultState route, Cmd.none )
+
         NotFoundRoute ->
             ( defaultState route, Cmd.none )

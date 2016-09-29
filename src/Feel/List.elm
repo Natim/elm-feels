@@ -2,7 +2,7 @@ module Feel.List exposing (..)
 
 import Feel.Messages exposing (..)
 import Feel.Models exposing (Feel)
-import Mood
+import Feel.Mood
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Date
@@ -42,7 +42,7 @@ viewFeel feel =
             [ div [ class "content" ]
                 [ div [ class "columns" ]
                     [ div [ class "column is-one-quarter" ]
-                        [ Mood.view feel.mood
+                        [ Feel.Mood.view feel.mood
                         ]
                     , div [ class "column is-two-quarters" ]
                         [ p []
