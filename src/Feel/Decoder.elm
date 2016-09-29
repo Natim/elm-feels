@@ -27,16 +27,12 @@ timestampDecoder =
 
 decodeTimestamp : String -> Decode.Decoder Date.Date
 decodeTimestamp timestamp =
-    let
-        convertedTimestamp =
-            Date.fromString timestamp
-    in
-        case convertedTimestamp of
-            Err err ->
-                Decode.fail err
+    case Date.fromString timestamp of
+        Err err ->
+            Decode.fail err
 
-            Ok ts ->
-                Decode.succeed ts
+        Ok ts ->
+            Decode.succeed ts
 
 
 moodDecoder : Decode.Decoder Mood
@@ -46,13 +42,9 @@ moodDecoder =
 
 decodeMood : String -> Decode.Decoder Mood
 decodeMood mood =
-    let
-        convertedMood =
-            Feel.Mood.fromLabel mood
-    in
-        case convertedMood of
-            Just m ->
-                Decode.succeed m
+    case Feel.Mood.fromLabel mood of
+        Just m ->
+            Decode.succeed m
 
-            Nothing ->
-                Decode.fail (mood ++ " is not a recognized mood")
+        Nothing ->
+            Decode.fail (mood ++ " is not a recognized mood")
