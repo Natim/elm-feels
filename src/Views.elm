@@ -72,26 +72,32 @@ brand =
         ]
 
 
-{-|
-TODO: conditionally show add feel button
--}
 navigation : Model -> Html Messages.Msg
 navigation model =
-    nav [ class "nav container has-shadow" ]
-        [ div [ class "nav-left" ]
-            [ brand
-            , div [ class "tabs is-medium" ]
-                [ ul []
-                    [ li [] [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
+    let
+        addFeelButton =
+            if model.route == ViewFeelsRoute then
+                Just <| buttonLink (FeelMessage ShowAddFeel) "fa-heart" "Log a Feel"
+            else
+                Nothing
+
+        contextualButtons =
+            List.filterMap identity [ addFeelButton ]
+    in
+        nav [ class "nav container has-shadow" ]
+            [ div [ class "nav-left" ]
+                [ brand
+                , div [ class "tabs is-medium" ]
+                    [ ul []
+                        [ li [] [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
+                        ]
                     ]
                 ]
-            ]
-        , div [ class "nav-right nav-menu" ]
-            [ span [ class "nav-item" ]
-                [ buttonLink (FeelMessage ShowAddFeel) "fa-heart" "Log a Feel"
+            , div [ class "nav-right nav-menu" ]
+                [ span [ class "nav-item" ]
+                    contextualButtons
                 ]
             ]
-        ]
 
 
 footer : Html Messages.Msg
