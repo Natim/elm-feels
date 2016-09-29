@@ -18,6 +18,7 @@ subscriptions model =
     Sub.none
 
 
+main : Program Never
 main =
     Navigation.program Routing.parser
         { init = init

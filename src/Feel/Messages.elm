@@ -7,3 +7,5 @@ import Feel.Models exposing (Feel, FeelId)
 type Msg
     = FetchAllDone (List Feel)
     | FetchAllFail Http.Error
+    | ShowFeelsOverview
+    | ShowAddFeel

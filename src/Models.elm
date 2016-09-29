@@ -12,15 +12,18 @@ type alias Model =
     }
 
 
+defaultState : Routing.Route -> Model
+defaultState route =
+    { feels = []
+    , route = route
+    }
+
+
 initialModel : Routing.Route -> ( Model, Cmd Msg )
 initialModel route =
     case route of
-        FeelsOverviewRoute ->
-            ( { feels = []
-              , route = route
-              }
-            , Cmd.map FeelMessage fetchAll
-            )
+        ViewFeelsRoute ->
+            ( defaultState route, Cmd.map FeelMessage fetchAll )
 
         NotFoundRoute ->
-            ( { feels = [], route = route }, Cmd.none )
+            ( defaultState route, Cmd.none )

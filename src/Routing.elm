@@ -2,19 +2,21 @@ module Routing exposing (..)
 
 import String
 import Navigation
-import UrlParser
+import UrlParser exposing ((</>))
 
 
 type Route
-    = FeelsOverviewRoute
+    = ViewFeelsRoute
+    | CreateFeelRoute
     | NotFoundRoute
 
 
 matchers : UrlParser.Parser (Route -> a) a
 matchers =
     UrlParser.oneOf
-        [ UrlParser.format FeelsOverviewRoute (UrlParser.s "")
-        , UrlParser.format FeelsOverviewRoute (UrlParser.s "feels")
+        [ UrlParser.format ViewFeelsRoute (UrlParser.s "")
+        , UrlParser.format ViewFeelsRoute (UrlParser.s "feels")
+        , UrlParser.format CreateFeelRoute (UrlParser.s "feel" </> UrlParser.s "new")
         ]
 
 

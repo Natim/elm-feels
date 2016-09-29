@@ -1,5 +1,6 @@
 module Feel.Update exposing (..)
 
+import Navigation
 import Feel.Messages exposing (..)
 import Feel.Models exposing (..)
 
@@ -12,3 +13,9 @@ update message feels =
 
         FetchAllDone fetchedFeels ->
             ( fetchedFeels, Cmd.none )
+
+        ShowFeelsOverview ->
+            ( feels, Navigation.newUrl "#feels" )
+
+        ShowAddFeel ->
+            ( feels, Navigation.newUrl "#feel/new" )
