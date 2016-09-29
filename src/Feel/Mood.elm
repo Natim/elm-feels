@@ -19,6 +19,11 @@ type Mood
     | Fantastic
 
 
+moods : List Mood
+moods =
+    [ Terrible, VeryBad, Bad, Okay, Good, VeryGood, Fantastic ]
+
+
 toEmoji : Mood -> Emoji
 toEmoji mood =
     case mood of

@@ -2,9 +2,10 @@ module FeelForm.View exposing (..)
 
 import FeelForm.Messages exposing (..)
 import Html exposing (..)
-import Html.Events exposing (onInput)
+import Html.Events exposing (onInput, onClick)
 import Html.Attributes exposing (..)
 import FeelForm.Models exposing (Model)
+import Feel.Mood exposing (Mood)
 
 
 view : Model -> Html Msg
@@ -26,9 +27,32 @@ view model =
         ]
 
 
+moodButton : Model -> Mood -> Html Msg
+moodButton model mood =
+    let
+        baseClasses =
+            "button is-large is-white"
+
+        classes =
+            if model.mood == Just mood then
+                baseClasses ++ " is-active"
+            else
+                baseClasses
+    in
+        div [ class "column is-narrow" ]
+            [ a [ class classes, onClick (SetMood mood) ]
+                [ text <| Feel.Mood.toEmoji mood ]
+            ]
+
+
 moodPicker : Model -> Html Msg
 moodPicker model =
-    div [] [ text "Mood Picker" ]
+    div []
+        [ label [ class "label" ] [ text "How's your current mood?" ]
+        , div [ class "columns is-mobile is-multiple" ]
+            (List.map (moodButton model) Feel.Mood.moods)
+        , div [] <| Maybe.withDefault [] <| Maybe.map (\x -> [ Feel.Mood.view x ]) model.mood
+        ]
 
 
 feelDescriber : Model -> Html Msg
