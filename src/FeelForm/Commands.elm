@@ -6,6 +6,7 @@ import Random.Array
 import FeelForm.Messages exposing (..)
 
 
+descriptionPlaceholders : Array.Array String
 descriptionPlaceholders =
     Array.fromList
         <| [ "Got a promotion at work!"
@@ -14,6 +15,7 @@ descriptionPlaceholders =
            ]
 
 
+generateDescriptionPlaceholder : Cmd Msg
 generateDescriptionPlaceholder =
     Random.generate (\x -> Maybe.withDefault "" x |> SetDescriptionPlaceholder)
         (Random.Array.sample descriptionPlaceholders)

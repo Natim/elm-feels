@@ -2,7 +2,9 @@ module Feel.Mood exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Utils exposing (upperFirst)
+import Utils exposing (upperFirst, spaceUppers)
+import String
+import Dict
 
 
 type alias Emoji =
@@ -17,11 +19,6 @@ type Mood
     | Good
     | VeryGood
     | Fantastic
-
-
-moods : List Mood
-moods =
-    [ Terrible, VeryBad, Bad, Okay, Good, VeryGood, Fantastic ]
 
 
 toEmoji : Mood -> Emoji
@@ -49,59 +46,34 @@ toEmoji mood =
             "😁"
 
 
+moods : List Mood
+moods =
+    [ Terrible, VeryBad, Bad, Okay, Good, VeryGood, Fantastic ]
+
+
 toLabel : Mood -> String
 toLabel mood =
-    case mood of
-        Terrible ->
-            "terrible"
+    toString mood
+        |> spaceUppers
+        |> String.toLower
 
-        VeryBad ->
-            "very bad"
 
-        Bad ->
-            "bad"
+moodLabelTuples : List ( String, Mood )
+moodLabelTuples =
+    List.map (\mood -> ( toLabel mood, mood )) moods
 
-        Okay ->
-            "okay"
 
-        Good ->
-            "good"
-
-        VeryGood ->
-            "very good"
-
-        Fantastic ->
-            "fantastic"
+moodLabelDict : Dict.Dict String Mood
+moodLabelDict =
+    Dict.fromList moodLabelTuples
 
 
 fromLabel : String -> Maybe Mood
 fromLabel label =
-    case label of
-        "terrible" ->
-            Just Terrible
-
-        "very bad" ->
-            Just VeryBad
-
-        "bad" ->
-            Just Bad
-
-        "okay" ->
-            Just Okay
-
-        "good" ->
-            Just Good
-
-        "very good" ->
-            Just VeryGood
-
-        "fantastic" ->
-            Just Fantastic
-
-        _ ->
-            Nothing
+    Dict.get label moodLabelDict
 
 
+view : Mood -> Html a
 view mood =
     div [ class "has-text-centered" ]
         [ p [ class "title is-2", style [ ( "marginBottom", ".5em" ) ] ]
