@@ -50,9 +50,10 @@ moodPicker model =
     div []
         [ label [ class "label" ]
             [ text "How's your current mood?" ]
-        , div [ class "columns is-mobile is-multiple" ]
+        , div [ class "columns is-multiline is-mobile" ]
             (List.map (moodButton model) Feel.Mood.moods)
         , div [] <| Maybe.withDefault [] <| Maybe.map (\x -> [ Feel.Mood.view x ]) model.mood
+        , br [] []
         ]
 
 

@@ -8,6 +8,7 @@ import Html.Attributes exposing (..)
 import Date
 import Date.Extra
 import String
+import Components exposing (buttonLink)
 
 
 {-|
@@ -40,7 +41,7 @@ viewFeel feel =
     div [ class "card is-fullwidth" ]
         [ div [ class "card-content" ]
             [ div [ class "content" ]
-                [ div [ class "columns" ]
+                [ div [ class "columns is-mobile" ]
                     [ div [ class "column is-one-quarter" ]
                         [ Feel.Mood.view feel.mood
                         ]
@@ -65,9 +66,20 @@ view feels =
     let
         dateSortedFeels =
             List.sortWith dateComparer feels
+
+        addFeelButton =
+            buttonLink ShowAddFeel "fa-heart" "Log a Feel"
     in
         div []
-            (List.map viewFeel dateSortedFeels)
+            (List.map viewFeel dateSortedFeels
+                ++ [ br [] [] ]
+                ++ [ br [] [] ]
+                ++ [ nav [ class "level" ]
+                        [ div [ class "level-item has-text-centered" ]
+                            [ addFeelButton ]
+                        ]
+                   ]
+            )
 
 
 {-|

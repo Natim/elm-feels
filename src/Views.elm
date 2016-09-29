@@ -49,18 +49,6 @@ tabLink model route action label =
         link classes action [ text label ]
 
 
-buttonLink : Messages.Msg -> Icon -> String -> Html Messages.Msg
-buttonLink action icon label =
-    a [ class "button is-primary", onClick action ]
-        [ span [ class "icon is-small" ]
-            [ i [ class <| "fa " ++ icon ]
-                []
-            ]
-        , span []
-            [ text label ]
-        ]
-
-
 brand : Html Messages.Msg
 brand =
     a
@@ -74,30 +62,16 @@ brand =
 
 navigation : Model -> Html Messages.Msg
 navigation model =
-    let
-        addFeelButton =
-            if model.route == ViewFeelsRoute then
-                Just <| buttonLink (FeelMessage ShowAddFeel) "fa-heart" "Log a Feel"
-            else
-                Nothing
-
-        contextualButtons =
-            List.filterMap identity [ addFeelButton ]
-    in
-        nav [ class "nav container has-shadow" ]
-            [ div [ class "nav-left" ]
-                [ brand
-                , div [ class "tabs is-medium" ]
-                    [ ul []
-                        [ li [] [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
-                        ]
+    nav [ class "nav container has-shadow" ]
+        [ div [ class "nav-left" ]
+            [ brand
+            , div [ class "tabs is-medium" ]
+                [ ul []
+                    [ li [] [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
                     ]
                 ]
-            , div [ class "nav-right nav-menu" ]
-                [ span [ class "nav-item" ]
-                    contextualButtons
-                ]
             ]
+        ]
 
 
 footer : Html Messages.Msg
