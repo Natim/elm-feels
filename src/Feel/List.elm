@@ -71,10 +71,13 @@ view feels =
             buttonLink ShowAddFeel "fa-heart" "Log a Feel"
     in
         div []
-            (List.map viewFeel dateSortedFeels
-                ++ [ br [] [] ]
-                ++ [ br [] [] ]
-                ++ [ nav [ class "level" ]
+            ([ h1 [ class "title is-3" ]
+                [ text "Recent Feels" ]
+             ]
+                ++ (List.map viewFeel dateSortedFeels)
+                ++ [ br [] []
+                   , br [] []
+                   , nav [ class "level" ]
                         [ div [ class "level-item has-text-centered" ]
                             [ addFeelButton ]
                         ]
