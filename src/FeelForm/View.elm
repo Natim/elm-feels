@@ -25,7 +25,6 @@ view model =
             , timeOfFeel model
             , br [] []
             , saveButton model
-            , cancelButton model
             ]
         ]
 
@@ -90,8 +89,3 @@ timeOfFeel model =
 saveButton : Model -> Html Msg
 saveButton model =
     a [ class "button is-primary" ] [ text "Save" ]
-
-
-cancelButton : Model -> Html Msg
-cancelButton model =
-    a [ class "button is-link" ] [ text "Cancel" ]
