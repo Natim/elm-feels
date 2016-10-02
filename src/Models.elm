@@ -24,12 +24,4 @@ defaultState route =
 
 initialModel : Routing.Route -> ( Model, Cmd Msg )
 initialModel route =
-    case route of
-        ViewFeelsRoute ->
-            ( defaultState route, Cmd.map FeelMessage fetchAll )
-
-        CreateFeelRoute ->
-            ( defaultState route, Cmd.none )
-
-        NotFoundRoute ->
-            ( defaultState route, Cmd.none )
+    ( defaultState route, Cmd.map FeelMessage fetchAll )
