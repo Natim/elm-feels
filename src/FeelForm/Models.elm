@@ -10,6 +10,7 @@ defaultState =
     , mood = Nothing
     , timestamp = Nothing
     , descriptionPlaceholder = "Write a bit about how you're feeling"
+    , error = Nothing
     }
 
 
@@ -21,4 +22,5 @@ type alias Model =
     , mood : Maybe Mood
     , timestamp : Maybe Date
     , descriptionPlaceholder : String
+    , error : Maybe String
     }

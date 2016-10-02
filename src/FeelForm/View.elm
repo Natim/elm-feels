@@ -24,6 +24,7 @@ view model =
             , br [] []
             , timeOfFeel model
             , br [] []
+            , errorMessage model
             , saveButton model
             ]
         ]
@@ -88,4 +89,20 @@ timeOfFeel model =
 
 saveButton : Model -> Html Msg
 saveButton model =
-    a [ class "button is-primary" ] [ text "Save" ]
+    a [ class "button is-primary", onClick Validate ]
+        [ text "Save" ]
+
+
+errorMessage : Model -> Html Msg
+errorMessage model =
+    if model.error /= Nothing then
+        div [ class "notification is-danger" ]
+            [ span [ class "icon" ]
+                [ i [ class "fa fa-exclamation-triangle" ]
+                    []
+                ]
+            , span []
+                [ text <| Maybe.withDefault "" model.error ]
+            ]
+    else
+        div [] []
