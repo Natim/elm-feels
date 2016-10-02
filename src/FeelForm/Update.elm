@@ -19,3 +19,9 @@ update message model =
 
         GenerateDescriptionPlaceholder ->
             ( model, generateDescriptionPlaceholder )
+
+        SetTimestamp ts ->
+            ( { model | timestamp = Just ts }, Cmd.none )
+
+        SetTimestampFail err ->
+            ( { model | timestamp = Nothing }, Cmd.none )

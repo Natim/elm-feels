@@ -4,6 +4,8 @@ import Array
 import Random
 import Random.Array
 import FeelForm.Messages exposing (..)
+import Date
+import Task
 
 
 descriptionPlaceholders : Array.Array String
@@ -19,3 +21,8 @@ generateDescriptionPlaceholder : Cmd Msg
 generateDescriptionPlaceholder =
     Random.generate (\x -> Maybe.withDefault "" x |> SetDescriptionPlaceholder)
         (Random.Array.sample descriptionPlaceholders)
+
+
+generateTimestamp : Cmd Msg
+generateTimestamp =
+    Date.now |> Task.perform SetTimestampFail SetTimestamp

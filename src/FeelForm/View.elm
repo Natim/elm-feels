@@ -6,6 +6,8 @@ import Html.Events exposing (onInput, onClick)
 import Html.Attributes exposing (..)
 import FeelForm.Models exposing (Model)
 import Feel.Mood exposing (Mood)
+import Date.Extra
+import Date
 
 
 view : Model -> Html Msg
@@ -19,6 +21,7 @@ view model =
         , div []
             [ moodPicker model
             , feelDescriber model
+            , br [] []
             , timeOfFeel model
             , br [] []
             , saveButton model
@@ -52,7 +55,9 @@ moodPicker model =
             [ text "How's your current mood?" ]
         , div [ class "columns is-multiline is-mobile" ]
             (List.map (moodButton model) Feel.Mood.moods)
-        , div [] <| Maybe.withDefault [] <| Maybe.map (\x -> [ Feel.Mood.view x ]) model.mood
+        , div []
+            <| Maybe.withDefault []
+            <| Maybe.map (\x -> [ Feel.Mood.view x ]) model.mood
         , br [] []
         ]
 
@@ -74,7 +79,12 @@ feelDescriber model =
 
 timeOfFeel : Model -> Html Msg
 timeOfFeel model =
-    div [] [ text "Time of feel" ]
+    div []
+        [ label [ class "label" ] [ text "Time of Feel" ]
+        , text
+            <| Date.Extra.toFormattedString "hh:mm a - dd MMMM y"
+            <| Maybe.withDefault (Date.fromTime 0) model.timestamp
+        ]
 
 
 saveButton : Model -> Html Msg

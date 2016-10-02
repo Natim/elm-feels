@@ -11,29 +11,9 @@ import String
 import Components exposing (buttonLink)
 
 
-{-|
-TODO: check out
-http://package.elm-lang.org/packages/justinmimbs/elm-date-extra/2.0.0/Date-Extra#
--}
 viewTimestamp : Date.Date -> String
 viewTimestamp timestamp =
-    let
-        hour =
-            toString <| Date.hour timestamp
-
-        minute =
-            toString <| Date.minute timestamp
-
-        day =
-            toString <| Date.day timestamp
-
-        month =
-            toString <| Date.month timestamp
-
-        year =
-            toString <| Date.year timestamp
-    in
-        hour ++ ":" ++ minute ++ " - " ++ String.join " " [ day, month, year ]
+    Date.Extra.toFormattedString "hh:mm a - dd MMMM y" timestamp
 
 
 viewFeel : Feel -> Html Msg

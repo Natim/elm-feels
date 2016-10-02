@@ -17,7 +17,10 @@ urlUpdate result model =
         command =
             case (Debug.log "route" currentRoute) of
                 Routing.CreateFeelRoute ->
-                    Cmd.map FeelFormMessage FeelForm.Commands.generateDescriptionPlaceholder
+                    Cmd.batch
+                        [ Cmd.map FeelFormMessage FeelForm.Commands.generateDescriptionPlaceholder
+                        , Cmd.map FeelFormMessage FeelForm.Commands.generateTimestamp
+                        ]
 
                 _ ->
                     Cmd.none
