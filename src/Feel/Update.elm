@@ -6,6 +6,12 @@ import Feel.Models exposing (..)
 import Feel.Commands
 import FeelForm.Update
 import FeelForm.Messages
+import Dict exposing (Dict)
+
+
+setFeel : Feel -> Dict FeelId Feel -> Dict FeelId Feel
+setFeel feel =
+    Dict.insert feel.id feel
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -30,7 +36,11 @@ update message model =
             ( model, Cmd.none )
 
         FetchAllDone fetchedFeels ->
-            ( { model | feels = fetchedFeels }, Cmd.none )
+            ( { model
+                | feels = Dict.fromList <| List.map (\feel -> ( feel.id, feel )) fetchedFeels
+              }
+            , Cmd.none
+            )
 
         FetchFeelDone feel ->
             ( model, Cmd.none )
@@ -63,7 +73,7 @@ update message model =
             ( model, Cmd.none )
 
         CreateFeelDone feel ->
-            ( { model | feels = feel :: model.feels }, Navigation.newUrl "#feels" )
+            ( { model | feels = setFeel feel model.feels }, Navigation.newUrl "#feels" )
 
         UpdateFeel feel ->
             ( model, Feel.Commands.updateFeel feel )
@@ -72,5 +82,4 @@ update message model =
             ( model, Cmd.none )
 
         UpdateFeelDone feel ->
-            -- TODO: actually update the feel
-            ( model, Navigation.newUrl "#feels" )
+            ( { model | feels = setFeel feel model.feels }, Navigation.newUrl "#feels" )

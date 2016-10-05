@@ -9,6 +9,7 @@ import Html.Events exposing (onClick)
 import Date
 import Date.Extra
 import Components exposing (buttonLink)
+import Dict
 
 
 viewTimestamp : Date.Date -> String
@@ -45,7 +46,7 @@ view : Model -> Html Msg
 view model =
     let
         dateSortedFeels =
-            List.sortWith dateComparer model.feels
+            List.sortWith dateComparer (Dict.values model.feels)
 
         addFeelButton =
             buttonLink ShowAddFeel "fa-heart" "Log a Feel"

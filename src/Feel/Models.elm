@@ -3,17 +3,18 @@ module Feel.Models exposing (..)
 import Feel.Mood exposing (Mood(..))
 import Date exposing (Date)
 import FeelForm.Models
+import Dict exposing (Dict)
 
 
 init : Model
 init =
-    { feels = []
+    { feels = Dict.empty
     , feelForm = FeelForm.Models.init
     }
 
 
 type alias Model =
-    { feels : List Feel
+    { feels : Dict FeelId Feel
     , feelForm : FeelForm.Models.Model
     }
 
