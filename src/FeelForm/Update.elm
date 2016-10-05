@@ -16,6 +16,7 @@ update message model =
                 , mood = Just feel.mood
                 , timestamp = Just feel.timestamp
                 , error = Nothing
+                , isSaved = True
               }
             , Cmd.none
             , Nothing
@@ -53,7 +54,7 @@ update message model =
         Save ->
             case (validate model.mood model.description model.timestamp) of
                 Ok ( mood, description, timestamp ) ->
-                    ( { model | error = Nothing }, Cmd.none, Just (ParentMessages.SaveFeel mood description timestamp) )
+                    ( { model | error = Nothing }, Cmd.none, Just (ParentMessages.CreateFeel mood description timestamp) )
 
                 Err err ->
                     ( { model | error = Just err }, Cmd.none, Nothing )

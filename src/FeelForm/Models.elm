@@ -11,16 +11,15 @@ init =
     , timestamp = Nothing
     , descriptionPlaceholder = "Write a bit about how you're feeling"
     , error = Nothing
+    , isSaved = False
     }
 
 
-{-|
-TODO: need to keep track of whether this is a new Feel or if we're updating a pre-existing one
--}
 type alias Model =
     { description : Maybe String
     , mood : Maybe Mood
     , timestamp : Maybe Date
     , descriptionPlaceholder : String
     , error : Maybe String
+    , isSaved : Bool
     }

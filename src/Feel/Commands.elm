@@ -30,10 +30,10 @@ feelsUrl =
     "http://localhost:4000/feels"
 
 
-saveFeel : Mood -> String -> Date -> Cmd Msg
-saveFeel mood description timestamp =
+createFeel : Mood -> String -> Date -> Cmd Msg
+createFeel mood description timestamp =
     HB.post feelsUrl
         |> HB.withJsonBody (Feel.Encoder.feelEncoder mood description timestamp)
         |> HB.withHeader "Content-Type" "application/json"
         |> HB.send (HB.jsonReader Feel.Decoder.idDecoder) HB.stringReader
-        |> Task.perform SaveFeelFail (\{ data } -> SaveFeelDone (constructFeel data description mood timestamp))
+        |> Task.perform CreateFeelFail (\{ data } -> CreateFeelDone (constructFeel data description mood timestamp))

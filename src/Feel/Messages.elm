@@ -15,7 +15,7 @@ type Msg
     | FetchFeelFail (HttpBuilder.Error String)
     | ShowFeelsOverview
     | ShowAddFeel
-    | SaveFeel Mood String Date
-    | SaveFeelFail (HttpBuilder.Error String)
-    | SaveFeelDone Feel
+    | CreateFeel Mood String Date
+    | CreateFeelFail (HttpBuilder.Error String)
+    | CreateFeelDone Feel
     | EditFeel Feel

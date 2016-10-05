@@ -8,7 +8,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Date
 import Date.Extra
-import String
 import Components exposing (buttonLink)
 
 

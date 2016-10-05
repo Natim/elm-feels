@@ -56,11 +56,11 @@ update message model =
                     ]
                 )
 
-        SaveFeel mood description timestamp ->
-            ( model, Feel.Commands.saveFeel mood description timestamp )
+        CreateFeel mood description timestamp ->
+            ( model, Feel.Commands.createFeel mood description timestamp )
 
-        SaveFeelFail error ->
+        CreateFeelFail error ->
             ( model, Cmd.none )
 
-        SaveFeelDone feel ->
+        CreateFeelDone feel ->
             ( { model | feels = feel :: model.feels }, Navigation.newUrl "#feels" )

@@ -3,7 +3,6 @@ module Routing exposing (..)
 import String
 import Navigation
 import UrlParser exposing ((</>))
-import Feel.Models exposing (FeelId)
 import Routes exposing (Route(..))
 
 
