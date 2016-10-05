@@ -4,10 +4,12 @@ import HttpBuilder
 import Feel.Models exposing (Feel, FeelId)
 import Date exposing (Date)
 import Feel.Mood exposing (Mood(..))
+import FeelForm.Messages
 
 
 type Msg
-    = FetchAllDone (List Feel)
+    = FeelFormMessage FeelForm.Messages.Msg
+    | FetchAllDone (List Feel)
     | FetchAllFail (HttpBuilder.Error String)
     | ShowFeelsOverview
     | ShowAddFeel

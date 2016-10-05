@@ -4,8 +4,8 @@ import Feel.Mood exposing (Mood)
 import Date exposing (Date)
 
 
-defaultState : Model
-defaultState =
+init : Model
+init =
     { description = Nothing
     , mood = Nothing
     , timestamp = Nothing

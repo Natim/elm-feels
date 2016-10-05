@@ -8,8 +8,7 @@ import Models exposing (Model)
 import Routing exposing (Route(..))
 import Messages exposing (Msg(..))
 import Feel.Messages exposing (Msg(ShowFeelsOverview, ShowAddFeel))
-import Feel.List
-import FeelForm.View
+import Feel.Views
 
 
 type alias Url =
@@ -93,10 +92,10 @@ page : Model -> Html Messages.Msg
 page model =
     case model.route of
         ViewFeelsRoute ->
-            Html.App.map FeelMessage (Feel.List.view model.feelModel)
+            Html.App.map FeelMessage (Feel.Views.list model.feelModel)
 
         CreateFeelRoute ->
-            Html.App.map FeelFormMessage (FeelForm.View.view model.feelFormState)
+            Html.App.map FeelMessage (Feel.Views.new model.feelModel)
 
         NotFoundRoute ->
             notFoundView

@@ -4,11 +4,27 @@ import Navigation
 import Feel.Messages exposing (..)
 import Feel.Models exposing (..)
 import Feel.Commands
+import FeelForm.Update
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update message model =
     case message of
+        FeelFormMessage subMsg ->
+            let
+                ( updatedFeelForm, childCmd, parentMessage ) =
+                    FeelForm.Update.update subMsg model.feelForm
+
+                ( newModel, cmd ) =
+                    case parentMessage of
+                        Nothing ->
+                            ( { model | feelForm = updatedFeelForm }, Cmd.none )
+
+                        Just msg ->
+                            update msg { model | feelForm = updatedFeelForm }
+            in
+                ( newModel, Cmd.batch [ Cmd.map FeelFormMessage childCmd, cmd ] )
+
         FetchAllFail error ->
             ( model, Cmd.none )
 
