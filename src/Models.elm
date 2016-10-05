@@ -8,7 +8,7 @@ import FeelForm.Models
 
 
 type alias Model =
-    { feels : List Feel
+    { feelModel : Feel.Models.Model
     , route : Routing.Route
     , feelFormState : FeelForm.Models.Model
     }
@@ -16,7 +16,7 @@ type alias Model =
 
 defaultState : Routing.Route -> Model
 defaultState route =
-    { feels = []
+    { feelModel = Feel.Models.init
     , route = route
     , feelFormState = FeelForm.Models.defaultState
     }

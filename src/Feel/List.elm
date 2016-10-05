@@ -1,7 +1,7 @@
 module Feel.List exposing (..)
 
 import Feel.Messages exposing (..)
-import Feel.Models exposing (Feel)
+import Feel.Models exposing (Feel, Model)
 import Feel.Mood
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -41,11 +41,11 @@ viewFeel feel =
         ]
 
 
-view : List Feel -> Html Msg
-view feels =
+view : Model -> Html Msg
+view model =
     let
         dateSortedFeels =
-            List.sortWith dateComparer feels
+            List.sortWith dateComparer model.feels
 
         addFeelButton =
             buttonLink ShowAddFeel "fa-heart" "Log a Feel"

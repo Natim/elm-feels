@@ -33,10 +33,10 @@ update msg model =
     case (Debug.log "msg" msg) of
         FeelMessage subMsg ->
             let
-                ( updatedFeels, cmd ) =
-                    Feel.Update.update subMsg model.feels
+                ( updatedFeelModel, cmd ) =
+                    Feel.Update.update subMsg model.feelModel
             in
-                ( { model | feels = updatedFeels }, Cmd.map FeelMessage cmd )
+                ( { model | feelModel = updatedFeelModel }, Cmd.map FeelMessage cmd )
 
         FeelFormMessage subMsg ->
             let

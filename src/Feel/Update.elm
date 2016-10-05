@@ -6,26 +6,26 @@ import Feel.Models exposing (..)
 import Feel.Commands
 
 
-update : Msg -> List Feel -> ( List Feel, Cmd Msg )
-update message feels =
+update : Msg -> Model -> ( Model, Cmd Msg )
+update message model =
     case message of
         FetchAllFail error ->
-            ( feels, Cmd.none )
+            ( model, Cmd.none )
 
         FetchAllDone fetchedFeels ->
-            ( fetchedFeels, Cmd.none )
+            ( { model | feels = fetchedFeels }, Cmd.none )
 
         ShowFeelsOverview ->
-            ( feels, Navigation.newUrl "#feels" )
+            ( model, Navigation.newUrl "#feels" )
 
         ShowAddFeel ->
-            ( feels, Navigation.newUrl "#feel/new" )
+            ( model, Navigation.newUrl "#feel/new" )
 
         SaveFeel mood description timestamp ->
-            ( feels, Feel.Commands.saveFeel mood description timestamp )
+            ( model, Feel.Commands.saveFeel mood description timestamp )
 
         SaveFeelFail error ->
-            ( feels, Cmd.none )
+            ( model, Cmd.none )
 
         SaveFeelDone feel ->
-            ( feel :: feels, Navigation.newUrl "#feels" )
+            ( { model | feels = feel :: model.feels }, Navigation.newUrl "#feels" )

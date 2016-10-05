@@ -4,6 +4,17 @@ import Feel.Mood exposing (Mood(..))
 import Date exposing (Date)
 
 
+init : Model
+init =
+    { feels = []
+    }
+
+
+type alias Model =
+    { feels : List Feel
+    }
+
+
 type alias FeelId =
     String
 

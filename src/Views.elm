@@ -93,7 +93,7 @@ page : Model -> Html Messages.Msg
 page model =
     case model.route of
         ViewFeelsRoute ->
-            Html.App.map FeelMessage (Feel.List.view model.feels)
+            Html.App.map FeelMessage (Feel.List.view model.feelModel)
 
         CreateFeelRoute ->
             Html.App.map FeelFormMessage (FeelForm.View.view model.feelFormState)
