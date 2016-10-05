@@ -14,3 +14,12 @@ type alias Feel =
     , mood : Mood
     , timestamp : Date
     }
+
+
+constructFeel : FeelId -> String -> Mood -> Date -> Feel
+constructFeel id description mood timestamp =
+    { id = id
+    , description = description
+    , mood = mood
+    , timestamp = timestamp
+    }

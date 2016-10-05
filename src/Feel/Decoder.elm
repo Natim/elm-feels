@@ -1,9 +1,14 @@
 module Feel.Decoder exposing (..)
 
-import Feel.Models exposing (Feel)
+import Feel.Models exposing (Feel, FeelId)
 import Feel.Mood exposing (Mood(..))
 import Json.Decode as Decode exposing ((:=), andThen)
 import Date
+
+
+idDecoder : Decode.Decoder FeelId
+idDecoder =
+    ("id" := Decode.string)
 
 
 collectionDecoder : Decode.Decoder (List Feel)

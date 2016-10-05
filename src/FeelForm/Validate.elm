@@ -1,7 +1,6 @@
 module FeelForm.Validate exposing (..)
 
 import Date exposing (Date)
-import Feel.Models exposing (Feel)
 import Feel.Mood exposing (Mood(..))
 import String
 

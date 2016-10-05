@@ -17,6 +17,12 @@
       "description": "Not a very nice day...",
       "mood": "bad",
       "timestamp": "2016-09-27T01:28:08.967Z"
+    },
+    {
+      "description": "Another great day!",
+      "mood": "very good",
+      "timestamp": "2016-10-05T07:23:49.335Z",
+      "id": "026d0c0e-b600-4111-8ab0-fec4f1f8795f"
     }
   ]
 }
