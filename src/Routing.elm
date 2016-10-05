@@ -3,11 +3,13 @@ module Routing exposing (..)
 import String
 import Navigation
 import UrlParser exposing ((</>))
+import Feel.Models exposing (FeelId)
 
 
 type Route
     = ViewFeelsRoute
     | CreateFeelRoute
+    | EditFeelRoute String
     | NotFoundRoute
 
 
@@ -17,6 +19,7 @@ matchers =
         [ UrlParser.format ViewFeelsRoute (UrlParser.s "")
         , UrlParser.format ViewFeelsRoute (UrlParser.s "feels")
         , UrlParser.format CreateFeelRoute (UrlParser.s "feel" </> UrlParser.s "new")
+        , UrlParser.format EditFeelRoute (UrlParser.s "feel" </> UrlParser.string)
         ]
 
 

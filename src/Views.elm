@@ -2,21 +2,13 @@ module Views exposing (..)
 
 import Html exposing (..)
 import Html.App
-import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
 import Models exposing (Model)
 import Routing exposing (Route(..))
 import Messages exposing (Msg(..))
 import Feel.Messages exposing (Msg(ShowFeelsOverview, ShowAddFeel))
 import Feel.Views
-
-
-type alias Url =
-    String
-
-
-type alias Icon =
-    String
+import Components exposing (actionLink)
 
 
 view : Model -> Html Messages.Msg
@@ -31,11 +23,6 @@ view model =
         ]
 
 
-link : String -> Messages.Msg -> List (Html.Html Messages.Msg) -> Html Messages.Msg
-link classes action content =
-    a [ class classes, onClick action ] content
-
-
 tabLink : Model -> Route -> Messages.Msg -> String -> Html Messages.Msg
 tabLink model route action label =
     let
@@ -45,7 +32,7 @@ tabLink model route action label =
             else
                 "nav-item is-tab"
     in
-        link classes action [ text label ]
+        actionLink classes action [ text label ]
 
 
 brand : Html Messages.Msg
@@ -93,6 +80,9 @@ page model =
     case model.route of
         ViewFeelsRoute ->
             Html.App.map FeelMessage (Feel.Views.list model.feelModel)
+
+        EditFeelRoute id ->
+            Html.App.map FeelMessage (Feel.Views.edit model.feelModel)
 
         CreateFeelRoute ->
             Html.App.map FeelMessage (Feel.Views.new model.feelModel)

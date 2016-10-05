@@ -6,8 +6,15 @@ import Messages exposing (Msg(..))
 import Feel.Update
 import FeelForm.Commands
 import Feel.Messages exposing (Msg(..))
+import FeelForm.Messages exposing (Msg(..))
+import Feel.Commands
 
 
+{-|
+  TODO: these are only run when the route is entered from another route.
+  We need to also perform these actions when entering this route as the first one
+  Maybe something like `onRouteEnter`
+-}
 urlUpdate : Result String Route -> Model -> ( Model, Cmd Messages.Msg )
 urlUpdate result model =
     let
@@ -23,6 +30,10 @@ urlUpdate result model =
                             [ FeelForm.Commands.generateDescriptionPlaceholder
                             , FeelForm.Commands.generateTimestamp
                             ]
+
+                Routing.EditFeelRoute id ->
+                    Cmd.map FeelMessage
+                        <| Feel.Commands.fetchById id (\x -> FeelFormMessage (InitFrom x))
 
                 _ ->
                     Cmd.none

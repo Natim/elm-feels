@@ -16,6 +16,7 @@ init =
 
 {-|
 TODO: currenly descriptionPlaceholder is only updated when the route is changed to CreateFeelRoute
+TODO: need to keep track of whether this is a new Feel or if we're updating a pre-existing one
 -}
 type alias Model =
     { description : Maybe String

@@ -71,6 +71,7 @@ feelDescriber model =
                 [ class "textarea"
                 , placeholder model.descriptionPlaceholder
                 , onInput SetDescription
+                , value (Maybe.withDefault "" model.description)
                 ]
                 []
             ]

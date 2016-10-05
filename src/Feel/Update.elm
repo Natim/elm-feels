@@ -31,6 +31,15 @@ update message model =
         FetchAllDone fetchedFeels ->
             ( { model | feels = fetchedFeels }, Cmd.none )
 
+        FetchFeelDone feel ->
+            ( model, Cmd.none )
+
+        FetchFeelFail error ->
+            ( model, Cmd.none )
+
+        EditFeel feel ->
+            ( model, Navigation.newUrl <| "#feel/" ++ feel.id )
+
         ShowFeelsOverview ->
             ( model, Navigation.newUrl "#feels" )
 

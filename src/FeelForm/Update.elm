@@ -10,6 +10,17 @@ import Feel.Messages as ParentMessages
 update : Msg -> Model -> ( Model, Cmd Msg, Maybe ParentMessages.Msg )
 update message model =
     case message of
+        InitFrom feel ->
+            ( { model
+                | description = Just feel.description
+                , mood = Just feel.mood
+                , timestamp = Just feel.timestamp
+                , error = Nothing
+              }
+            , Cmd.none
+            , Nothing
+            )
+
         SetDescription newDescription ->
             ( { model | description = Just newDescription }, Cmd.none, Nothing )
 

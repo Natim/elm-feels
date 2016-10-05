@@ -2,10 +2,12 @@ module FeelForm.Messages exposing (..)
 
 import Feel.Mood exposing (Mood)
 import Date exposing (Date)
+import Feel.Models exposing (Feel)
 
 
 type Msg
-    = SetDescription String
+    = InitFrom Feel
+    | SetDescription String
     | SetTimestamp Date
     | SetMood Mood
     | GenerateDescriptionPlaceholder

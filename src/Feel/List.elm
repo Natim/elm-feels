@@ -5,6 +5,7 @@ import Feel.Models exposing (Feel, Model)
 import Feel.Mood
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Date
 import Date.Extra
 import String
