@@ -1,6 +1,7 @@
 module Main exposing (..)
 
-import Routing exposing (Route(..))
+import Routes exposing (Route(..))
+import Routing
 import Navigation
 import Models exposing (Model)
 import Update

@@ -4,23 +4,12 @@ import String
 import Navigation
 import UrlParser exposing ((</>))
 import Feel.Models exposing (FeelId)
-
-
-type Route
-    = ViewFeelsRoute
-    | CreateFeelRoute
-    | EditFeelRoute String
-    | NotFoundRoute
+import Routes exposing (Route(..))
 
 
 matchers : UrlParser.Parser (Route -> a) a
 matchers =
-    UrlParser.oneOf
-        [ UrlParser.format ViewFeelsRoute (UrlParser.s "")
-        , UrlParser.format ViewFeelsRoute (UrlParser.s "feels")
-        , UrlParser.format CreateFeelRoute (UrlParser.s "feel" </> UrlParser.s "new")
-        , UrlParser.format EditFeelRoute (UrlParser.s "feel" </> UrlParser.string)
-        ]
+    UrlParser.oneOf Routes.orderedMatchers
 
 
 hashParser : Navigation.Location -> Result String Route

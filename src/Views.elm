@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.App
 import Html.Attributes exposing (..)
 import Models exposing (Model)
-import Routing exposing (Route(..))
+import Routes exposing (Route(..))
 import Messages exposing (Msg(..))
 import Feel.Messages exposing (Msg(ShowFeelsOverview, ShowAddFeel))
 import Feel.Views
@@ -17,7 +17,7 @@ view model =
         [ navigation model
         , div [ class "container" ]
             [ section [ class "section" ]
-                [ page model ]
+                [ viewFor model ]
             , footer
             ]
         ]
@@ -75,8 +75,8 @@ footer =
         ]
 
 
-page : Model -> Html Messages.Msg
-page model =
+viewFor : Model -> Html Messages.Msg
+viewFor model =
     case model.route of
         ViewFeelsRoute ->
             Html.App.map FeelMessage (Feel.Views.list model.feelModel)
@@ -88,9 +88,4 @@ page model =
             Html.App.map FeelMessage (Feel.Views.new model.feelModel)
 
         NotFoundRoute ->
-            notFoundView
-
-
-notFoundView : Html Messages.Msg
-notFoundView =
-    div [] [ text "Not found" ]
+            div [] [ text "Not found" ]

@@ -1,24 +1,24 @@
 module Models exposing (..)
 
-import Routing exposing (Route(..))
 import Feel.Models exposing (Feel)
 import Messages exposing (Msg(..))
 import Feel.Commands exposing (fetchAll)
+import Routes exposing (Route)
 
 
 type alias Model =
     { feelModel : Feel.Models.Model
-    , route : Routing.Route
+    , route : Route
     }
 
 
-defaultState : Routing.Route -> Model
+defaultState : Route -> Model
 defaultState route =
     { feelModel = Feel.Models.init
     , route = route
     }
 
 
-initialModel : Routing.Route -> ( Model, Cmd Msg )
+initialModel : Route -> ( Model, Cmd Msg )
 initialModel route =
-    ( defaultState route, Cmd.map FeelMessage fetchAll )
+    ( defaultState route, Routes.onRouteEnter route )
