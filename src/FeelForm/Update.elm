@@ -21,6 +21,9 @@ update message model =
             , Nothing
             )
 
+        Reset ->
+            ( FeelForm.Models.init, Cmd.none, Nothing )
+
         SetDescription newDescription ->
             ( { model | description = Just newDescription }, Cmd.none, Nothing )
 

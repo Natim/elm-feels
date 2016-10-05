@@ -15,3 +15,4 @@ type Msg
     | SetTimestampFail Date
     | Validate
     | Save
+    | Reset
