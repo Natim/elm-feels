@@ -3,7 +3,7 @@ module FeelForm.Update exposing (..)
 import FeelForm.Messages exposing (..)
 import FeelForm.Models exposing (..)
 import FeelForm.Commands exposing (..)
-import String
+import FeelForm.Validate exposing (validate)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -28,16 +28,17 @@ update message model =
             ( { model | timestamp = Nothing }, Cmd.none )
 
         Validate ->
-            let
-                description =
-                    Maybe.withDefault "" model.description
+            case (validate model.mood model.description model.timestamp) of
+                Ok () ->
+                    ( { model | error = Nothing }, Cmd.none )
 
-                err =
-                    if model.mood == Nothing then
-                        Just "Please select a mood!"
-                    else if String.length description == 0 then
-                        Just "Please enter a description!"
-                    else
-                        Nothing
-            in
-                ( { model | error = err }, Cmd.none )
+                Err err ->
+                    ( { model | error = Just err }, Cmd.none )
+
+        Save ->
+            case (validate model.mood model.description model.timestamp) of
+                Ok () ->
+                    ( { model | error = Nothing }, Cmd.none )
+
+                Err err ->
+                    ( { model | error = Just err }, Cmd.none )

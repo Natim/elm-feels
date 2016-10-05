@@ -89,7 +89,7 @@ timeOfFeel model =
 
 saveButton : Model -> Html Msg
 saveButton model =
-    a [ class "button is-primary", onClick Validate ]
+    a [ class "button is-primary", onClick Save ]
         [ text "Save" ]
 
 

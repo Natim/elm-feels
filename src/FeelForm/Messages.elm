@@ -12,3 +12,4 @@ type Msg
     | SetDescriptionPlaceholder String
     | SetTimestampFail Date
     | Validate
+    | Save
