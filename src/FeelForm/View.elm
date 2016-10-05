@@ -43,7 +43,11 @@ moodButton model mood =
                 baseClasses
     in
         div [ class "column is-narrow" ]
-            [ a [ class classes, onClick (SetMood mood) ]
+            [ a
+                [ class classes
+                , onClick (SetMood mood)
+                , style [ ( "font-size", "2.5em" ) ]
+                ]
                 [ text <| Feel.Mood.toEmoji mood ]
             ]
 
