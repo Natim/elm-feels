@@ -3,9 +3,6 @@ module Routes exposing (..)
 import UrlParser exposing ((</>))
 import Feel.Commands
 import Messages exposing (Msg(..))
-import Feel.Views
-import Html.App
-import Html exposing (div, text)
 import FeelForm.Commands
 import FeelForm.Messages exposing (Msg(..))
 import Feel.Messages exposing (Msg(..))
@@ -18,6 +15,7 @@ type Route
     | NotFoundRoute
 
 
+orderedMatchers : List (UrlParser.Parser (Route -> a) a)
 orderedMatchers =
     [ UrlParser.format ViewFeelsRoute (UrlParser.s "")
     , UrlParser.format ViewFeelsRoute (UrlParser.s "feels")
@@ -27,6 +25,7 @@ orderedMatchers =
     ]
 
 
+onRouteEnter : Route -> Cmd Messages.Msg
 onRouteEnter route =
     case route of
         ViewFeelsRoute ->

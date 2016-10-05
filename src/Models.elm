@@ -2,7 +2,6 @@ module Models exposing (..)
 
 import Feel.Models exposing (Feel)
 import Messages exposing (Msg(..))
-import Feel.Commands exposing (fetchAll)
 import Routes exposing (Route)
 
 

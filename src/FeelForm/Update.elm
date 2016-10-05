@@ -16,7 +16,7 @@ update message model =
                 , mood = Just feel.mood
                 , timestamp = Just feel.timestamp
                 , error = Nothing
-                , isSaved = True
+                , id = Just feel.id
               }
             , Cmd.none
             , Nothing
@@ -54,7 +54,14 @@ update message model =
         Save ->
             case (validate model.mood model.description model.timestamp) of
                 Ok ( mood, description, timestamp ) ->
-                    ( { model | error = Nothing }, Cmd.none, Just (ParentMessages.CreateFeel mood description timestamp) )
+                    let
+                        cmd =
+                            if model.id /= Nothing then
+                                ParentMessages.UpdateFeel { id = Maybe.withDefault "" model.id, mood = mood, description = description, timestamp = timestamp }
+                            else
+                                ParentMessages.CreateFeel mood description timestamp
+                    in
+                        ( { model | error = Nothing }, Cmd.none, Just cmd )
 
                 Err err ->
                     ( { model | error = Just err }, Cmd.none, Nothing )

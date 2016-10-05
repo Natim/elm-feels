@@ -7,11 +7,11 @@ import Date exposing (Date)
 init : Model
 init =
     { description = Nothing
+    , id = Nothing
     , mood = Nothing
     , timestamp = Nothing
     , descriptionPlaceholder = "Write a bit about how you're feeling"
     , error = Nothing
-    , isSaved = False
     }
 
 
@@ -21,5 +21,5 @@ type alias Model =
     , timestamp : Maybe Date
     , descriptionPlaceholder : String
     , error : Maybe String
-    , isSaved : Bool
+    , id : Maybe String
     }

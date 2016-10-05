@@ -19,3 +19,6 @@ type Msg
     | CreateFeelFail (HttpBuilder.Error String)
     | CreateFeelDone Feel
     | EditFeel Feel
+    | UpdateFeelDone Feel
+    | UpdateFeelFail (HttpBuilder.Error String)
+    | UpdateFeel Feel

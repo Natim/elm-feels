@@ -64,3 +64,13 @@ update message model =
 
         CreateFeelDone feel ->
             ( { model | feels = feel :: model.feels }, Navigation.newUrl "#feels" )
+
+        UpdateFeel feel ->
+            ( model, Feel.Commands.updateFeel feel )
+
+        UpdateFeelFail error ->
+            ( model, Cmd.none )
+
+        UpdateFeelDone feel ->
+            -- TODO: actually update the feel
+            ( model, Navigation.newUrl "#feels" )
