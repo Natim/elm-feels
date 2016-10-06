@@ -24,11 +24,11 @@ view model =
 
 
 tabLink : Model -> Route -> Messages.Msg -> String -> Html Messages.Msg
-tabLink model route action label =
+tabLink { route } targetRoute action label =
     let
         classes =
             "nave-item is-tab"
-                ++ if model.route == route then
+                ++ if route == targetRoute then
                     " is-active"
                    else
                     ""

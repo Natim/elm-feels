@@ -25,8 +25,8 @@ view model =
             , br [] []
             , timeOfFeel model
             , br [] []
-            , errorMessage model
-            , saveButton model
+            , errorMessage model.error
+            , saveButton
             ]
         ]
 
@@ -65,15 +65,15 @@ moodPicker model =
 
 
 feelDescriber : Model -> Html Msg
-feelDescriber model =
+feelDescriber { description, descriptionPlaceholder } =
     div []
         [ cLabel "What's going on?"
         , p [ class "control" ]
             [ textarea
                 [ class "textarea"
-                , placeholder model.descriptionPlaceholder
+                , placeholder descriptionPlaceholder
                 , onInput SetDescription
-                , value (Maybe.withDefault "" model.description)
+                , value (Maybe.withDefault "" description)
                 ]
                 []
             ]
@@ -81,29 +81,29 @@ feelDescriber model =
 
 
 timeOfFeel : Model -> Html Msg
-timeOfFeel model =
+timeOfFeel { timestamp } =
     div []
         [ cLabel "Time of Feel"
         , text
             <| Date.Extra.toFormattedString "hh:mm a - dd MMMM y"
-            <| Maybe.withDefault (Date.fromTime 0) model.timestamp
+            <| Maybe.withDefault (Date.fromTime 0) timestamp
         ]
 
 
-saveButton : Model -> Html Msg
-saveButton model =
+saveButton : Html Msg
+saveButton =
     buttonLink Save "fa-check" "Save" ""
 
 
-errorMessage : Model -> Html Msg
-errorMessage model =
-    if model.error /= Nothing then
+errorMessage : Maybe String -> Html Msg
+errorMessage error =
+    if error /= Nothing then
         div [ class "notification is-danger" ]
             [ span [ class "icon" ]
                 [ icon "fa-exclamation-triangle"
                 ]
             , span []
-                [ text <| Maybe.withDefault "" model.error ]
+                [ text <| Maybe.withDefault "" error ]
             ]
     else
         div [] []

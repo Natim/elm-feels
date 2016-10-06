@@ -7,12 +7,12 @@ import Feel.Models exposing (Feel)
 
 type Msg
     = InitFrom Feel
+    | SetDescriptionPlaceholder String
     | SetDescription String
     | SetTimestamp Date
+    | SetTimestampFail Date
     | SetMood Mood
     | GenerateDescriptionPlaceholder
-    | SetDescriptionPlaceholder String
-    | SetTimestampFail Date
     | Validate
     | Save
     | Reset

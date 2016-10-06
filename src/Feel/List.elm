@@ -18,22 +18,22 @@ viewTimestamp timestamp =
 
 
 viewFeel : Feel -> Html Msg
-viewFeel feel =
+viewFeel { mood, description, timestamp } =
     div [ class "card is-fullwidth" ]
         [ div [ class "card-content" ]
             [ div [ class "content" ]
                 [ div [ class "columns is-mobile" ]
                     [ div [ class "column is-one-quarter" ]
-                        [ Feel.Mood.view feel.mood
+                        [ Feel.Mood.view mood
                         ]
                     , div [ class "column is-two-quarters" ]
                         [ p []
                             [ strong [] [ text "Thoughts" ]
                             , br [] []
-                            , text feel.description
+                            , text description
                             ]
                         , p []
-                            [ small [] [ text <| viewTimestamp feel.timestamp ]
+                            [ small [] [ text <| viewTimestamp timestamp ]
                             ]
                         ]
                     ]
@@ -43,10 +43,10 @@ viewFeel feel =
 
 
 view : Model -> Html Msg
-view model =
+view { feels } =
     let
         dateSortedFeels =
-            List.sortWith dateComparer (Dict.values model.feels)
+            List.sortWith dateComparer (Dict.values feels)
 
         addFeelButton =
             buttonLink ShowAddFeel "fa-heart" "Log a Feel" "is-large"

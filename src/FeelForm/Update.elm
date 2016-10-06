@@ -57,7 +57,12 @@ update message model =
                     let
                         cmd =
                             if model.id /= Nothing then
-                                ParentMessages.UpdateFeel { id = Maybe.withDefault "" model.id, mood = mood, description = description, timestamp = timestamp }
+                                ParentMessages.UpdateFeel
+                                    { id = Maybe.withDefault "" model.id
+                                    , mood = mood
+                                    , description = description
+                                    , timestamp = timestamp
+                                    }
                             else
                                 ParentMessages.CreateFeel mood description timestamp
                     in
