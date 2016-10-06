@@ -16,3 +16,5 @@ type Msg
     | Validate
     | Save
     | Reset
+    | Cancel
+    | Delete

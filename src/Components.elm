@@ -20,7 +20,7 @@ cLabel s =
 
 icon : Icon -> Html msg
 icon icon' =
-    i [ class "icon" ] [ i [ class <| "fa " ++ icon' ] [] ]
+    span [ class "icon" ] [ i [ class <| "fa " ++ icon' ] [] ]
 
 
 actionLink : Classes -> msg -> List (Html.Html msg) -> Html msg

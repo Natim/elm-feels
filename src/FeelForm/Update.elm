@@ -5,6 +5,7 @@ import FeelForm.Models exposing (..)
 import FeelForm.Commands exposing (..)
 import FeelForm.Validate exposing (validate)
 import Feel.Messages as ParentMessages
+import Navigation
 
 
 update : Msg -> Model -> ( Model, Cmd Msg, Maybe ParentMessages.Msg )
@@ -21,6 +22,13 @@ update message model =
             , Cmd.none
             , Nothing
             )
+
+        Delete ->
+            -- TODO: Impl
+            ( model, Cmd.none, Nothing )
+
+        Cancel ->
+            ( model, Navigation.back 1, Nothing )
 
         Reset ->
             ( FeelForm.Models.init, Cmd.none, Nothing )
