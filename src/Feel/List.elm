@@ -8,7 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Date
 import Date.Extra
-import Components exposing (buttonLink)
+import Components exposing (buttonLink, actionLink, icon)
 import Dict
 
 
@@ -17,23 +17,35 @@ viewTimestamp timestamp =
     Date.Extra.toFormattedString "hh:mm a - dd MMMM y" timestamp
 
 
+editFeelButton : Feel -> Html Msg
+editFeelButton feel =
+    actionLink "is-outlined is-primary"
+        (EditFeel feel)
+        [ icon "fa-cog"
+        , span []
+            [ text "Edit" ]
+        ]
+
+
 viewFeel : Feel -> Html Msg
-viewFeel { mood, description, timestamp } =
+viewFeel feel =
     div [ class "card is-fullwidth" ]
         [ div [ class "card-content" ]
             [ div [ class "content" ]
                 [ div [ class "columns is-mobile" ]
                     [ div [ class "column is-one-quarter" ]
-                        [ Feel.Mood.view mood
+                        [ Feel.Mood.view feel.mood
                         ]
                     , div [ class "column is-two-quarters" ]
-                        [ p []
+                        [ div [ class "is-pulled-right" ]
+                            [ editFeelButton feel ]
+                        , p []
                             [ strong [] [ text "Thoughts" ]
                             , br [] []
-                            , text description
+                            , text feel.description
                             ]
                         , p []
-                            [ small [] [ text <| viewTimestamp timestamp ]
+                            [ small [] [ text <| viewTimestamp feel.timestamp ]
                             ]
                         ]
                     ]
