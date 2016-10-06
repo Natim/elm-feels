@@ -27,10 +27,11 @@ tabLink : Model -> Route -> Messages.Msg -> String -> Html Messages.Msg
 tabLink model route action label =
     let
         classes =
-            if model.route == route then
-                "nav-item is-tab is-active"
-            else
-                "nav-item is-tab"
+            "nave-item is-tab"
+                ++ if model.route == route then
+                    " is-active"
+                   else
+                    ""
     in
         actionLink classes action [ text label ]
 
@@ -53,7 +54,8 @@ navigation model =
             [ brand
             , div [ class "tabs is-medium" ]
                 [ ul []
-                    [ li [] [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
+                    [ li []
+                        [ tabLink model ViewFeelsRoute (FeelMessage ShowFeelsOverview) "Feel Log" ]
                     ]
                 ]
             ]

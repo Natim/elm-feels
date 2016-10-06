@@ -8,6 +8,7 @@ import FeelForm.Models exposing (Model)
 import Feel.Mood exposing (Mood)
 import Date.Extra
 import Date
+import Components exposing (cLabel, buttonLink, icon)
 
 
 view : Model -> Html Msg
@@ -33,14 +34,12 @@ view model =
 moodButton : Model -> Mood -> Html Msg
 moodButton model mood =
     let
-        baseClasses =
-            "button is-large is-white"
-
         classes =
-            if model.mood == Just mood then
-                baseClasses ++ " is-active"
-            else
-                baseClasses
+            "button is-large is-white"
+                ++ if model.mood == Just mood then
+                    " is-active"
+                   else
+                    ""
     in
         div [ class "column is-narrow" ]
             [ a
@@ -55,8 +54,7 @@ moodButton model mood =
 moodPicker : Model -> Html Msg
 moodPicker model =
     div []
-        [ label [ class "label" ]
-            [ text "How's your current mood?" ]
+        [ cLabel "How's your current mood?"
         , div [ class "columns is-multiline is-mobile" ]
             (List.map (moodButton model) Feel.Mood.moods)
         , div []
@@ -69,7 +67,7 @@ moodPicker model =
 feelDescriber : Model -> Html Msg
 feelDescriber model =
     div []
-        [ label [ class "label" ] [ text "What's going on?" ]
+        [ cLabel "What's going on?"
         , p [ class "control" ]
             [ textarea
                 [ class "textarea"
@@ -85,7 +83,7 @@ feelDescriber model =
 timeOfFeel : Model -> Html Msg
 timeOfFeel model =
     div []
-        [ label [ class "label" ] [ text "Time of Feel" ]
+        [ cLabel "Time of Feel"
         , text
             <| Date.Extra.toFormattedString "hh:mm a - dd MMMM y"
             <| Maybe.withDefault (Date.fromTime 0) model.timestamp
@@ -94,8 +92,7 @@ timeOfFeel model =
 
 saveButton : Model -> Html Msg
 saveButton model =
-    a [ class "button is-primary", onClick Save ]
-        [ text "Save" ]
+    buttonLink Save "fa-check" "Save" ""
 
 
 errorMessage : Model -> Html Msg
@@ -103,8 +100,7 @@ errorMessage model =
     if model.error /= Nothing then
         div [ class "notification is-danger" ]
             [ span [ class "icon" ]
-                [ i [ class "fa fa-exclamation-triangle" ]
-                    []
+                [ icon "fa-exclamation-triangle"
                 ]
             , span []
                 [ text <| Maybe.withDefault "" model.error ]

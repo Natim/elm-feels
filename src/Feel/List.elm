@@ -49,7 +49,7 @@ view model =
             List.sortWith dateComparer (Dict.values model.feels)
 
         addFeelButton =
-            buttonLink ShowAddFeel "fa-heart" "Log a Feel"
+            buttonLink ShowAddFeel "fa-heart" "Log a Feel" "is-large"
     in
         div []
             ([ h1 [ class "title is-3" ]

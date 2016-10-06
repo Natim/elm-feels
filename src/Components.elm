@@ -13,9 +13,14 @@ type alias Classes =
     String
 
 
+cLabel : String -> Html msg
+cLabel s =
+    label [ class "label" ] [ text s ]
+
+
 icon : Icon -> Html msg
 icon icon' =
-    i [ class "icon is-small" ] [ i [ class <| "fa " ++ icon' ] [] ]
+    i [ class "icon" ] [ i [ class <| "fa " ++ icon' ] [] ]
 
 
 actionLink : Classes -> msg -> List (Html.Html msg) -> Html msg
@@ -23,9 +28,9 @@ actionLink classes action content =
     a [ class classes, onClick action ] content
 
 
-buttonLink : msg -> Icon -> String -> Html msg
-buttonLink action icon' label =
-    actionLink "button is-primary is-large"
+buttonLink : msg -> Icon -> String -> String -> Html msg
+buttonLink action icon' label size =
+    actionLink ("button is-primary " ++ size)
         action
         [ icon icon'
         , span []
