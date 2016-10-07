@@ -56,7 +56,11 @@ update message model =
             ( model, Cmd.none )
 
         EditFeel feel ->
-            ( model, Navigation.newUrl <| "#feel/" ++ feel.id )
+            let
+                ( updatedFeelForm, _, _ ) =
+                    FeelForm.Update.update (FeelForm.Messages.InitFrom feel) model.feelForm
+            in
+                ( { model | feelForm = updatedFeelForm }, Navigation.newUrl <| "#feel/" ++ feel.id )
 
         ShowFeelsOverview ->
             ( model, Navigation.newUrl "#feels" )
