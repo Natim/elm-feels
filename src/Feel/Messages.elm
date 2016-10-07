@@ -22,3 +22,6 @@ type Msg
     | UpdateFeelDone Feel
     | UpdateFeelFail (HttpBuilder.Error String)
     | UpdateFeel Feel
+    | DeleteFeel FeelId
+    | DeleteFeelDone FeelId
+    | DeleteFeelFail (HttpBuilder.Error String)

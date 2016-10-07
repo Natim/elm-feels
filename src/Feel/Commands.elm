@@ -56,3 +56,10 @@ updateFeel feel =
         |> HB.withHeader "Content-Type" "application/json"
         |> HB.send (HB.jsonReader Feel.Decoder.memberDecoder) HB.stringReader
         |> Task.perform UpdateFeelFail (\{ data } -> UpdateFeelDone data)
+
+
+deleteFeel : FeelId -> Cmd Msg
+deleteFeel id =
+    HB.delete (feelUrl id)
+        |> HB.send HB.unitReader HB.stringReader
+        |> Task.perform DeleteFeelFail (\_ -> DeleteFeelDone id)

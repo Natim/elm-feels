@@ -2,6 +2,16 @@ module Utils exposing (..)
 
 import String
 import Regex
+import Html
+import Maybe
+
+
+-- TODO: add helper for conditonally adding classes
+
+
+maybeRender : (a -> Html.Html b) -> Maybe a -> Html.Html b
+maybeRender mapper maybe =
+    Maybe.map mapper maybe |> Maybe.withDefault (Html.text "")
 
 
 spaceUppers : String -> String

@@ -16,6 +16,11 @@ setFeel feel =
     Dict.insert feel.id feel
 
 
+removeFeelById : FeelId -> Dict FeelId Feel -> Dict FeelId Feel
+removeFeelById id =
+    Dict.remove id
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update message model =
     case message of
@@ -85,3 +90,12 @@ update message model =
 
         UpdateFeelDone feel ->
             ( { model | feels = setFeel feel model.feels }, Navigation.newUrl "#feels" )
+
+        DeleteFeel id ->
+            ( model, Feel.Commands.deleteFeel id )
+
+        DeleteFeelDone id ->
+            ( { model | feels = removeFeelById id model.feels }, Navigation.newUrl "#feels" )
+
+        DeleteFeelFail error ->
+            ( model, Cmd.none )

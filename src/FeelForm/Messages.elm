@@ -2,7 +2,7 @@ module FeelForm.Messages exposing (..)
 
 import Feel.Mood exposing (Mood)
 import Date exposing (Date)
-import Feel.Models exposing (Feel)
+import Feel.Models exposing (Feel, FeelId)
 
 
 type Msg
@@ -17,4 +17,4 @@ type Msg
     | Save
     | Reset
     | Cancel
-    | Delete
+    | Delete FeelId

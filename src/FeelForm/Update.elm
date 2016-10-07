@@ -23,9 +23,8 @@ update message model =
             , Nothing
             )
 
-        Delete ->
-            -- TODO: Impl
-            ( model, Cmd.none, Nothing )
+        Delete id ->
+            ( model, Cmd.none, Just (ParentMessages.DeleteFeel id) )
 
         Cancel ->
             ( model, Navigation.back 1, Nothing )

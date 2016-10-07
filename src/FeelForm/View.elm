@@ -9,40 +9,34 @@ import Feel.Mood exposing (Mood)
 import Date.Extra
 import Date
 import Components exposing (cLabel, buttonLink, icon)
+import Feel.Models exposing (FeelId)
+import Utils exposing (maybeRender)
 
 
 view : Model -> Html Msg
 view model =
-    let
-        maybeDeleteButton =
-            if model.id /= Nothing then
-                Just [ deleteButton ]
-            else
-                Nothing
-
-        deleteButton' =
-            Maybe.withDefault [] <| maybeDeleteButton
-    in
-        div []
-            [ h1 [ class "title" ]
-                [ text "Log a Feel" ]
-            , h2 [ class "subtitle" ]
-                [ text "How are you doing, pal?" ]
-            , hr [] []
-            , div []
-                [ moodPicker model
-                , feelDescriber model
-                , br [] []
-                , timeOfFeel model
-                , br [] []
-                , errorMessage model.error
-                , p [ class "control is-grouped" ]
-                    [ p [ class "control" ] [ saveButton ]
-                    , p [ class "control" ] deleteButton'
-                    , p [ class "control" ] [ cancelButton ]
+    div []
+        [ h1 [ class "title" ]
+            [ text "Log a Feel" ]
+        , h2 [ class "subtitle" ]
+            [ text "How are you doing, pal?" ]
+        , hr [] []
+        , div []
+            [ moodPicker model
+            , feelDescriber model
+            , br [] []
+            , timeOfFeel model
+            , br [] []
+            , maybeRender errorMessage model.error
+            , p [ class "control is-grouped" ]
+                [ p [ class "control" ] [ saveButton ]
+                , p [ class "control" ]
+                    [ maybeRender deleteButton model.id
                     ]
+                , p [ class "control" ] [ cancelButton ]
                 ]
             ]
+        ]
 
 
 moodButton : Model -> Mood -> Html Msg
@@ -72,8 +66,8 @@ moodPicker model =
         , div [ class "columns is-multiline is-mobile" ]
             (List.map (moodButton model) Feel.Mood.moods)
         , div []
-            <| Maybe.withDefault []
-            <| Maybe.map (\x -> [ Feel.Mood.view x ]) model.mood
+            [ maybeRender Feel.Mood.view model.mood
+            ]
         , br [] []
         ]
 
@@ -114,22 +108,19 @@ cancelButton =
     a [ class "button", onClick Cancel ] [ span [] [ text "Cancel" ] ]
 
 
-deleteButton : Html Msg
-deleteButton =
-    a [ class "button is-danger", onClick Delete ]
+deleteButton : FeelId -> Html Msg
+deleteButton id =
+    a [ class "button is-danger", onClick (Delete id) ]
         [ icon "fa-times"
         , span []
             [ text "Delete" ]
         ]
 
 
-errorMessage : Maybe String -> Html Msg
+errorMessage : String -> Html Msg
 errorMessage error =
-    if error /= Nothing then
-        div [ class "notification is-danger" ]
-            [ icon "fa-exclamation-triangle"
-            , span []
-                [ text <| Maybe.withDefault "" error ]
-            ]
-    else
-        div [] []
+    div [ class "notification is-danger" ]
+        [ icon "fa-exclamation-triangle"
+        , span []
+            [ text error ]
+        ]
