@@ -9,6 +9,8 @@ import FeelForm.Messages
 import Dict exposing (Dict)
 
 
+{-| TODO: clean up API, don't want this here
+-}
 setFeel : Feel -> Dict FeelId Feel -> Dict FeelId Feel
 setFeel feel =
     Dict.insert feel.id feel

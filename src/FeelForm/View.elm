@@ -16,12 +16,12 @@ view model =
     let
         maybeDeleteButton =
             if model.id /= Nothing then
-                Just deleteButton
+                Just [ deleteButton ]
             else
                 Nothing
 
         deleteButton' =
-            Maybe.withDefault [] <| Maybe.map (\x -> [ x ]) maybeDeleteButton
+            Maybe.withDefault [] <| maybeDeleteButton
     in
         div []
             [ h1 [ class "title" ]

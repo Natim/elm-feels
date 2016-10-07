@@ -57,6 +57,7 @@ viewFeel feel =
 view : Model -> Html Msg
 view { feels } =
     let
+        -- TODO: clean up API for accessing feels model, don't want to have to use Dict.values here
         dateSortedFeels =
             List.sortWith dateComparer (Dict.values feels)
 
