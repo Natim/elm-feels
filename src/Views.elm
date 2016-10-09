@@ -27,7 +27,7 @@ tabLink : Model -> Route -> Messages.Msg -> String -> Html Messages.Msg
 tabLink { route } targetRoute action label =
     let
         classes =
-            "nave-item is-tab"
+            "nav-item is-tab"
                 ++ if route == targetRoute then
                     " is-active"
                    else
