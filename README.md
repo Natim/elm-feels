@@ -1,101 +1,34 @@
-This project was bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).
+# elm-feels
+> A simple app for organizing your Feels
 
-Below you will find some information on how to perform common tasks.  
-You can find the most recent version of this guide [here](https://github.com/halfzebra/create-elm-app/blob/master/template/README.md).
+![Image](http://i1.kym-cdn.com/photos/images/original/000/421/566/93b.jpg)
 
 ## Table of Contents
-- [Sending feedback](#sending-feedback)
-- [Folder structure](#folder-structure)
-- [Installing Elm packages](#installing-elm-packages)
-- [Testing](#testing)
-- [Available scripts](#available-scripts)
-  - [elm-app build](#elm-app-build)
-  - [elm-app start](#elm-app-start)
-  - [elm-app eject](#elm-app-eject)
-  - [elm-app <elm-platform-comand>](#elm-app-elm-platform-comand)
-    - [package](#package)
-    - [repl](#repl)
-    - [make](#make)
-    - [reactor](#reactor)
-- [IDE setup for Hot Module Replacement](#ide-setup-for-hot-module-replacement)
+- [Motivation](#motivation)
+- [Vision](#vision)
+- [Contributors](#contributors)
+- [Installation](#installation)
 
-## Sending feedback
-You are very velcome with any [feedback](https://github.com/halfzebra/create-elm-app/issues)
+## Motivation
+I'm creating this app to study [Elm](http://elm-lang.org) and experience creating a service from scratch to actually pushing it into production. I also want to have a small example service to work on from time to time whenever I want to try new stuff. This could also include things such as practicing design or evaluating and improving the UX.
 
-## Installing Elm packages
+## Vision
+Ideally, I would like this app to be a place where you check in a couple of times per day to record your mood and any related thoughts. It could then help you track your mood changes and help you analyze what causes changes in your mood. I would also like to include a "end of day"-type reflection where you summarize your day, and what you could do better tomorrow.
 
-```sh
-elm-app package install <package-name>
+Ideally, I would like to look more into practical ways to improve one's mindset and mood, and apply them here. One example is this [TED talk](https://www.youtube.com/watch?v=uOrzmFUJtrs), which says that giving yourself compliments is an effective method to build self-esteem.
+
+After the general outline of the app is complete, I'll be looking more into creating a suitable backend with authentication for it, before giving it a design over-haul and renaming it. :)
+
+## Installation
+
+To run this app, you need both Node.js and Elm installed.
+
+```
+elm package install
+npm install
+npm run api # Runs the API server
+npm run start # Starts the Elm app
 ```
 
-## Folder structure
-```
-my-app/
-  README.md
-  elm-package.json
-  src/
-    favicon.ico
-    index.html
-    index.js
-    main.css
-    Main.elm
-```
-For the project to build, these files must exist with exact filenames:
-
-- `src/index.html` is the page template;
-- `src/favicon.ico` is the icon you see in the browser tab;
-- `src/index.js` is the JavaScript entry point.
-
-You can delete or rename the other files.
-
-You may create subdirectories inside src.
-
-## Testing
-We recommend using [node-test-runner](https://github.com/rtfeldman/node-test-runner) for testing.
-
-It is a command line tool, which helps you to start writing unit tests for your Elm code.
-
-## Available scripts
-In the project directory you can run:
-### `elm-app build`
-Builds the app for production to the `dist` folder.  
-
-The build is minified and the filenames include the hashes.  
-Your app is ready to be deployed!
-
-### `elm-app start`
-Runs the app in the development mode.  
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.  
-You will also see any lint errors in the console.
-
-### `elm-app eject`
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Elm Platform, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-### `elm-app <elm-platform-comand>`
-Create Elm App does not rely on global installation of Elm Platform, but you still can use it's local Elm Platform to access default command line tools:
-
-#### `package`
-Alias for [elm-package](http://guide.elm-lang.org/get_started.html#elm-package)
-
-Use it for installing Elm packages from [package.elm-lang.org](http://package.elm-lang.org/)
-
-#### `repl`
-Alias for [elm-repl](http://guide.elm-lang.org/get_started.html#elm-repl)
-
-#### `make`
-Alias for  [elm-make](http://guide.elm-lang.org/get_started.html#elm-make)
-
-#### `reactor`
-Alias for  [elm-reactor](http://guide.elm-lang.org/get_started.html#elm-reactor)
-
-## IDE setup for Hot Module Replacement
-Remember to disable [safe write](https://webpack.github.io/docs/webpack-dev-server.html#working-with-editors-ides-supporting-safe-write) if you are using VIM or IntelliJ IDE, such as WebStrom.
-# elm-feels
+## Contributors
+Anyone who's interested in learning Elm together with me, or is interested in this type of project is more than welcome to join. Open up an issue, or send me an email and I'd be happy to include you!

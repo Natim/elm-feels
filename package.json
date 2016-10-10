@@ -1,14 +1,15 @@
 {
   "name": "elm-feels",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
+  "description": "A simple app for organizing your Feels",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "elm-app start",
+    "api": "node ./api.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Bjorn Tegelund",
+  "license": "agpl-3.0",
   "dependencies": {
     "bulma": "^0.1.2",
     "font-awesome": "^4.6.3",
