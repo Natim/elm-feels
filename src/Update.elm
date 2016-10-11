@@ -13,7 +13,7 @@ urlUpdate result model =
         currentRoute =
             (Debug.log "route" <| Routing.routeFromResult result)
     in
-        ( { model | route = currentRoute }, Routes.onRouteEnter currentRoute )
+        { model | route = currentRoute } ! [ Routes.onRouteEnter currentRoute ]
 
 
 update : Messages.Msg -> Model -> ( Model, Cmd Messages.Msg )
@@ -24,4 +24,4 @@ update msg model =
                 ( updatedFeelModel, cmd ) =
                     Feel.Update.update subMsg model.feelModel
             in
-                ( { model | feelModel = updatedFeelModel }, Cmd.map FeelMessage cmd )
+                { model | feelModel = updatedFeelModel } ! [ Cmd.map FeelMessage cmd ]

@@ -9,6 +9,21 @@ import FeelForm.Messages
 import Dict exposing (Dict)
 
 
+gotoFeels : Cmd Msg
+gotoFeels =
+    Navigation.newUrl "#feels"
+
+
+gotoNewFeel : Cmd Msg
+gotoNewFeel =
+    Navigation.newUrl "#feels/new"
+
+
+gotoFeel : FeelId -> Cmd Msg
+gotoFeel id =
+    Navigation.newUrl <| "#feel/" ++ id
+
+
 {-| TODO: clean up API, don't want this here
 -}
 setFeel : Feel -> Dict FeelId Feel -> Dict FeelId Feel
@@ -37,69 +52,69 @@ update message model =
                         Just msg ->
                             update msg { model | feelForm = updatedFeelForm }
             in
-                ( newModel, Cmd.batch [ Cmd.map FeelFormMessage childCmd, cmd ] )
+                newModel ! [ Cmd.map FeelFormMessage childCmd, cmd ]
 
         FetchAllFail error ->
-            ( model, Cmd.none )
+            model ! []
 
         FetchAllDone fetchedFeels ->
-            ( { model
-                | feels = Dict.fromList <| List.map (\feel -> ( feel.id, feel )) fetchedFeels
-              }
-            , Cmd.none
-            )
+            { model
+                | feels =
+                    Dict.fromList
+                        <| List.map (\f -> ( f.id, f )) fetchedFeels
+            }
+                ! []
 
         FetchFeelDone feel ->
-            ( model, Cmd.none )
+            model ! []
 
         FetchFeelFail error ->
-            ( model, Cmd.none )
+            model ! []
 
         EditFeel feel ->
             let
                 ( updatedFeelForm, _, _ ) =
                     FeelForm.Update.update (FeelForm.Messages.InitFrom feel) model.feelForm
             in
-                ( { model | feelForm = updatedFeelForm }, Navigation.newUrl <| "#feel/" ++ feel.id )
+                { model | feelForm = updatedFeelForm }
+                    ! [ gotoFeel feel.id ]
 
         ShowFeelsOverview ->
-            ( model, Navigation.newUrl "#feels" )
+            model ! [ gotoFeels ]
 
         ShowAddFeel ->
             let
                 ( updatedFeelForm, cmd, _ ) =
                     FeelForm.Update.update FeelForm.Messages.Reset model.feelForm
             in
-                ( { model | feelForm = updatedFeelForm }
-                , Cmd.batch
-                    [ Navigation.newUrl "#feel/new"
-                    , Cmd.map FeelFormMessage cmd
-                    ]
-                )
+                { model | feelForm = updatedFeelForm }
+                    ! [ gotoNewFeel
+                      , Cmd.map FeelFormMessage cmd
+                      ]
 
         CreateFeel mood description timestamp ->
-            ( model, Feel.Commands.createFeel mood description timestamp )
+            model ! [ Feel.Commands.createFeel mood description timestamp ]
 
         CreateFeelFail error ->
-            ( model, Cmd.none )
+            model ! []
 
         CreateFeelDone feel ->
-            ( { model | feels = setFeel feel model.feels }, Navigation.newUrl "#feels" )
+            { model | feels = setFeel feel model.feels } ! [ gotoFeels ]
 
         UpdateFeel feel ->
-            ( model, Feel.Commands.updateFeel feel )
+            model ! [ Feel.Commands.updateFeel feel ]
 
         UpdateFeelFail error ->
-            ( model, Cmd.none )
+            model ! []
 
         UpdateFeelDone feel ->
-            ( { model | feels = setFeel feel model.feels }, Navigation.newUrl "#feels" )
+            { model | feels = setFeel feel model.feels } ! [ gotoFeels ]
 
         DeleteFeel id ->
-            ( model, Feel.Commands.deleteFeel id )
+            model ! [ Feel.Commands.deleteFeel id ]
 
         DeleteFeelDone id ->
-            ( { model | feels = removeFeelById id model.feels }, Navigation.newUrl "#feels" )
+            { model | feels = removeFeelById id model.feels } ! [ gotoFeels ]
 
         DeleteFeelFail error ->
-            ( model, Cmd.none )
+            model ! []
