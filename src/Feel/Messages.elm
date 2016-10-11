@@ -10,6 +10,7 @@ import FeelForm.Messages
 type Msg
     = FeelFormMessage FeelForm.Messages.Msg
     | FetchAllDone (List Feel)
+    | FetchAllFailed String
     | FetchAllFail (HttpBuilder.Error String)
     | FetchFeelDone Feel
     | FetchFeelFail (HttpBuilder.Error String)

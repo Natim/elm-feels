@@ -57,6 +57,9 @@ update message model =
         FetchAllFail error ->
             model ! []
 
+        FetchAllFailed error ->
+            model ! []
+
         FetchAllDone fetchedFeels ->
             { model
                 | feels =

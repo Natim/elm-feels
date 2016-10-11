@@ -20,7 +20,7 @@ collectionDecoder =
 memberDecoder : Decode.Decoder Feel
 memberDecoder =
     JDP.decode Feel
-        |> JDP.required "id" Decode.string
+        |> JDP.required "_id" Decode.string
         |> JDP.required "description" Decode.string
         |> JDP.required "mood" (Decode.string `andThen` decodeMood)
         |> JDP.required "timestamp" (Decode.string `andThen` decodeTimestamp)

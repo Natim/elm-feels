@@ -14,4 +14,5 @@ const feathersClient = require('./js/feathers-client')
 const Elm = require('./Main.elm')
 const root = document.getElementById('root')
 
-Elm.Main.embed(root)
+const app = Elm.Main.embed(root)
+feathersClient(app)

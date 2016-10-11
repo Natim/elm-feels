@@ -6,6 +6,7 @@ import Messages exposing (Msg(..))
 import FeelForm.Commands
 import FeelForm.Messages exposing (Msg(..))
 import Feel.Messages exposing (Msg(..))
+import Feathers
 
 
 type Route
@@ -29,7 +30,7 @@ onRouteEnter : Route -> Cmd Messages.Msg
 onRouteEnter route =
     case route of
         ViewFeelsRoute ->
-            Cmd.map FeelMessage Feel.Commands.fetchAll
+            Cmd.batch [ Feathers.getFeels (), Cmd.map FeelMessage Feel.Commands.fetchAll ]
 
         EditFeelRoute id ->
             Cmd.map FeelMessage
