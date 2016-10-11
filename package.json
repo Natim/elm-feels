@@ -12,7 +12,6 @@
   "license": "agpl-3.0",
   "dependencies": {
     "bulma": "^0.1.2",
-    "font-awesome": "^4.6.3",
-    "json-server": "^0.8.21"
+    "font-awesome": "^4.6.3"
   }
 }
