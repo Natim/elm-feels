@@ -20,8 +20,15 @@ jsonValueDecoder decoder errorMessage successMessage value =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Feathers.getFeelsDone
-        (jsonValueDecoder Feel.Decoder.collectionDecoder
-            (\s -> FeelMessage (Feel.Messages.FetchAllFail s))
-            (\v -> FeelMessage (Feel.Messages.FetchAllDone v))
-        )
+    Sub.batch
+        [ Feathers.getFeelsDone
+            (jsonValueDecoder Feel.Decoder.collectionDecoder
+                (\s -> FeelMessage (Feel.Messages.FetchAllFail s))
+                (\v -> FeelMessage (Feel.Messages.FetchAllDone v))
+            )
+        , Feathers.getFeelDone
+            (jsonValueDecoder Feel.Decoder.memberDecoder
+                (\s -> FeelMessage (Feel.Messages.FetchFeelFail s))
+                (\v -> FeelMessage (Feel.Messages.FetchFeelDone v))
+            )
+        ]

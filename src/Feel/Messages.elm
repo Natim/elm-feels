@@ -12,7 +12,7 @@ type Msg
     | FetchAllDone (List Feel)
     | FetchAllFail String
     | FetchFeelDone Feel
-    | FetchFeelFail (HttpBuilder.Error String)
+    | FetchFeelFail String
     | ShowFeelsOverview
     | ShowAddFeel
     | CreateFeel Mood String Date

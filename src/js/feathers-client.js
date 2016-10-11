@@ -16,4 +16,13 @@ module.exports = function (elmApp) {
       elmApp.ports.getFeelsDone.send({})
     })
   })
+
+  // GET /feels/:id
+  elmApp.ports.getFeel.subscribe((id) => {
+    feelService.get(id).then((result) => {
+      elmApp.ports.getFeelDone.send(result)
+    }, () => {
+      elmApp.ports.getFeelDone.send({})
+    })
+  })
 }

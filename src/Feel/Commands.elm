@@ -11,14 +11,11 @@ import Feel.Mood
 import Task
 
 
-fetchById : FeelId -> (Feel.Models.Feel -> Msg) -> Cmd Msg
-fetchById id msg =
-    HB.get (feelsUrl ++ "/" ++ id)
-        |> HB.send (HB.jsonReader Feel.Decoder.memberDecoder) HB.stringReader
-        |> Task.perform FetchFeelFail (\{ data } -> msg data)
-
-
-
+-- fetchById : FeelId -> (Feel.Models.Feel -> Msg) -> Cmd Msg
+-- fetchById id msg =
+--     HB.get (feelsUrl ++ "/" ++ id)
+--         |> HB.send (HB.jsonReader Feel.Decoder.memberDecoder) HB.stringReader
+--         |> Task.perform FetchFeelFail (\{ data } -> msg data)
 -- fetchAll : Cmd Msg
 -- fetchAll =
 --     HB.get feelsUrl

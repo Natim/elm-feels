@@ -7,3 +7,9 @@ port getFeels : () -> Cmd msg
 
 
 port getFeelsDone : (Json.Value -> msg) -> Sub msg
+
+
+port getFeel : String -> Cmd msg
+
+
+port getFeelDone : (Json.Value -> msg) -> Sub msg
