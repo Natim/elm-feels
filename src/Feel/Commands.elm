@@ -18,11 +18,12 @@ fetchById id msg =
         |> Task.perform FetchFeelFail (\{ data } -> msg data)
 
 
-fetchAll : Cmd Msg
-fetchAll =
-    HB.get feelsUrl
-        |> HB.send (HB.jsonReader Feel.Decoder.collectionDecoder) HB.stringReader
-        |> Task.perform FetchAllFail (\{ data } -> FetchAllDone data)
+
+-- fetchAll : Cmd Msg
+-- fetchAll =
+--     HB.get feelsUrl
+--         |> HB.send (HB.jsonReader Feel.Decoder.collectionDecoder) HB.stringReader
+--         |> Task.perform FetchAllFail (\{ data } -> FetchAllDone data)
 
 
 host : String

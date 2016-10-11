@@ -30,7 +30,7 @@ onRouteEnter : Route -> Cmd Messages.Msg
 onRouteEnter route =
     case route of
         ViewFeelsRoute ->
-            Cmd.batch [ Feathers.getFeels (), Cmd.map FeelMessage Feel.Commands.fetchAll ]
+            Cmd.batch [ Feathers.getFeels () ]
 
         EditFeelRoute id ->
             Cmd.map FeelMessage
