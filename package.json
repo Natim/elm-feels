@@ -11,7 +11,15 @@
   "author": "Bjorn Tegelund",
   "license": "agpl-3.0",
   "dependencies": {
+    "babel-polyfill": "^6.16.0",
     "bulma": "^0.1.2",
-    "font-awesome": "^4.6.3"
+    "feathers-authentication": "^0.7.11",
+    "feathers-client": "^1.6.1",
+    "feathers-rest": "^1.5.0",
+    "font-awesome": "^4.6.3",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "standard": "^8.4.0"
   }
 }

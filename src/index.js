@@ -1,9 +1,17 @@
-require('./main.css');
-require('../node_modules/bulma/css/bulma.css');
-require('../node_modules/font-awesome/css/font-awesome.min.css');
+// Babel & fetch polyfills
+require('babel-polyfill')
+require('whatwg-fetch/fetch')
 
-var Elm = require('./Main.elm');
+// Setup global styles
+require('./main.css')
+require('../node_modules/bulma/css/bulma.css')
+require('../node_modules/font-awesome/css/font-awesome.min.css')
 
-var root  = document.getElementById('root');
+// Client for featheres API
+const feathersClient = require('./js/feathers-client')
 
-Elm.Main.embed(root);
+// Bootstrap Elm app
+const Elm = require('./Main.elm')
+const root = document.getElementById('root')
+
+Elm.Main.embed(root)
