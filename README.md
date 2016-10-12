@@ -25,6 +25,7 @@ To run this app, you need both Node.js and Elm installed.
 
 ```
 elm package install
+npm install -g create-elm-app
 npm install
 npm run api # Runs the API server
 npm run start # Starts the Elm app
