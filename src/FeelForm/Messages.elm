@@ -18,3 +18,5 @@ type Msg
     | Reset
     | Cancel
     | Delete FeelId
+    | ChooseTime
+    | TimeUpdated String

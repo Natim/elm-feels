@@ -16,7 +16,7 @@ gotoFeels =
 
 gotoNewFeel : Cmd Msg
 gotoNewFeel =
-    Navigation.newUrl "#feels/new"
+    Navigation.newUrl "#feel/new"
 
 
 gotoFeel : FeelId -> Cmd Msg

@@ -7,6 +7,8 @@ import Models exposing (Model)
 import Update
 import Views
 import Messages exposing (Msg(..))
+import FeelForm.Messages
+import Ports
 
 
 init : Result String Route -> ( Model, Cmd Msg )
@@ -18,6 +20,9 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
 
+--subscriptions : Model -> Sub Msg
+--subscriptions model =
+--    Ports.foobar FeelForm.Messages.TimeUpdated
 
 main : Program Never
 main =

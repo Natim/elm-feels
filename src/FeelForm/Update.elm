@@ -6,6 +6,19 @@ import FeelForm.Commands exposing (..)
 import FeelForm.Validate exposing (validate)
 import Feel.Messages as ParentMessages
 import Navigation
+import Ports
+import Date exposing (fromString)
+import Debug
+
+
+I need these subscriptions to be called, but they aren't because they'd need to be
+registered in Main.elm but I don't know how
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Ports.foobar TimeUpdated
+
+
 
 
 update : Msg -> Model -> ( Model, Cmd Msg, Maybe ParentMessages.Msg )
@@ -22,6 +35,13 @@ update message model =
             , Cmd.none
             , Nothing
             )
+
+        ChooseTime ->
+            ( model, Ports.onTestLol "test123", Nothing )
+
+        TimeUpdated time ->
+            Debug.log time
+            ( { model | timestamp = Just (Date.fromString time |> Result.withDefault (Date.fromTime 0)) }, Cmd.none, Nothing )
 
         Delete id ->
             ( model, Cmd.none, Just (ParentMessages.DeleteFeel id) )

@@ -92,9 +92,19 @@ timeOfFeel : Model -> Html Msg
 timeOfFeel { timestamp } =
     div []
         [ cLabel "Time of Feel"
-        , text
+        , div []
+        [ text
             <| Date.Extra.toFormattedString "hh:mm a - dd MMMM y"
             <| Maybe.withDefault (Date.fromTime 0) timestamp
+        ]
+        , input
+            [ id "test123"
+            , type' "text"
+            ] []
+            --[ text "asd" ]
+            --<| Date.Extra.toFormattedString "hh:mm a - dd MMMM y"
+            --<| Maybe.withDefault (Date.fromTime 0) timestamp
+        , buttonLink ChooseTime "fa-check" "Choose time" ""
         ]
 
 
